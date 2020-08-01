@@ -1,0 +1,54 @@
+group 'com.mopub_flutter'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.0.0'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://s3.amazonaws.com/moat-sdk-builds" }
+        maven { url 'https://maven.google.com' } 
+        maven { url 'https://adcolony.bintray.com/AdColony' }
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 19
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+   implementation('com.mopub:mopub-sdk:+@aar') {
+        transitive = true
+    }
+
+implementation 'com.adcolony:sdk:4.2.1'
+implementation 'com.mopub.mediation:adcolony:4.2.1.0'
+implementation 'com.google.android.gms:play-services-ads:19.3.0'
+implementation 'com.mopub.mediation:admob:19.3.0.0'
+}
+
