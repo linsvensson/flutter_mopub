@@ -110,12 +110,12 @@ class MopubBannerAdView implements MoPubView.BannerAdListener, PlatformView {
 
     @Override
     public void dispose() {
-//        channel.setMethodCallHandler(null);
+    	// Is it required?
+        channel.setMethodCallHandler(null);
         if (adView != null) {
             adView.setAutorefreshEnabled(false);
             adView.destroy();
         }
-//        disposed = true;
     }
 
     @Override

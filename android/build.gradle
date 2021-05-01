@@ -18,7 +18,6 @@ rootProject.allprojects {
         jcenter()
         maven { url "https://s3.amazonaws.com/moat-sdk-builds" }
         maven { url 'https://maven.google.com' } 
-        maven { url 'https://adcolony.bintray.com/AdColony' }
     }
 }
 
@@ -46,9 +45,7 @@ dependencies {
         transitive = true
     }
 
-implementation 'com.adcolony:sdk:4.2.1'
-implementation 'com.mopub.mediation:adcolony:4.2.1.0'
 implementation 'com.google.android.gms:play-services-ads:19.3.0'
-implementation 'com.mopub.mediation:admob:19.3.0.0'
+implementation 'com.mopub.mediation:admob:19.3.0.2'
 }
 

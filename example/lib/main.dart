@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     try {
-      MoPub.init('ad_unit_id', testMode: true).then((_) {
+      MoPub.init('b195f8dd8ded45fe847ad89ed1d016da', testMode: true).then((_) {
         _loadRewardedAd();
         _loadInterstitialAd();
       });
@@ -108,7 +108,7 @@ class _MyAppState extends State<MyApp> {
               ],
             ),
             MoPubBannerAd(
-              adUnitId: 'ad_unit_id',
+              adUnitId: 'b195f8dd8ded45fe847ad89ed1d016da',
               bannerSize: BannerSize.STANDARD,
               keepAlive: true,
               listener: (result, dynamic) {
