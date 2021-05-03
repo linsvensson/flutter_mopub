@@ -71,13 +71,13 @@ class _MyAppState extends State<MyApp> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () async {
                     await interstitialAd.load();
                   },
                   child: Text('Load interstitial'),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () async {
                     interstitialAd.show();
                   },
@@ -89,13 +89,13 @@ class _MyAppState extends State<MyApp> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () async {
                     await videoAd.load();
                   },
                   child: Text('Load Video'),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () async {
                     var result = await videoAd.isReady();
                     print('Is Ready $result');
