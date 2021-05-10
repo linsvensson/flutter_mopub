@@ -50,10 +50,10 @@
 		<key>NSAllowsArbitraryLoadsForMedia</key>
 		<true/>
 		<key>NSAllowsArbitraryLoadsInWebContent</key>
-    <true/>
+		<true/>
 	</dict>
 	<key>GADApplicationIdentifier</key>
-	<string>add_google_id_here</string>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
 	<key>AppLovinSdkKey</key>
 	<string>add_app_lovin_key_here</string>
 </dict>
