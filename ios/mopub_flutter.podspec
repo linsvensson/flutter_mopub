@@ -3,7 +3,7 @@
 # Run `pod lib lint flutter_mopub.podspec` to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'flutter_mopub'
+  s.name             = 'mopub_flutter'
   s.version          = '1.1.1'
   s.summary          = 'A new flutter plugin project.'
   s.description      = <<-DESC
