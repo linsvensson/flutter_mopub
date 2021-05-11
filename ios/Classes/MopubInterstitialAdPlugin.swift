@@ -7,7 +7,7 @@
 
 import Foundation
 import Flutter
-import MoPubSDK
+import MoPub
 
 public class MopubInterstitialAdPlugin : NSObject, FlutterPlugin {
     
