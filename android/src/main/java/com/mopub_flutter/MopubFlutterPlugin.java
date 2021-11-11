@@ -17,17 +17,28 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry;
 
+
 import static com.mopub.common.logging.MoPubLog.SdkLogEvent.CUSTOM;
 
 /**
  * MopubFlutterPlugin
  */
-public class MopubFlutterPlugin implements MethodCallHandler {
+public class MopubFlutterPlugin implements MethodCallHandler, FlutterPlugin {
 
     private Activity activity;
 
     private MopubFlutterPlugin(Activity activity) {
         this.activity = activity;
+    }
+
+    @Override
+    public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+        // TODO: your plugin is now attached to a Flutter experience.
+    }
+
+    @Override
+    public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+        // TODO: your plugin is no longer attached to a Flutter experience.
     }
 
     public static void registerWith(PluginRegistry.Registrar registrar) {
