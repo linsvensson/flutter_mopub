@@ -23,22 +23,12 @@ import static com.mopub.common.logging.MoPubLog.SdkLogEvent.CUSTOM;
 /**
  * MopubFlutterPlugin
  */
-public class MopubFlutterPlugin implements MethodCallHandler, FlutterPlugin {
+public class MopubFlutterPlugin implements MethodCallHandler {
 
     private Activity activity;
 
     private MopubFlutterPlugin(Activity activity) {
         this.activity = activity;
-    }
-
-    @Override
-    public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
-        // TODO: your plugin is now attached to a Flutter experience.
-    }
-
-    @Override
-    public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
-        // TODO: your plugin is no longer attached to a Flutter experience.
     }
 
     public static void registerWith(PluginRegistry.Registrar registrar) {
