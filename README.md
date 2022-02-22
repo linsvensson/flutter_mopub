@@ -8,45 +8,11 @@ Call `Mopub.init()` in the `initState()` of your app
 
 ```sh
 try {
-      MoPub.init('ad_unit_id', testMode: true).then((_) {
-        _loadRewardedAd();
-        _loadInterstitialAd();
-      });
+      MoPub.init('ad_unit_id', testMode: true);
     } on PlatformException {}
 ```
-  
-### 2. To load a rewarded ad 
  
- ```sh
- void _loadRewardedAd() {
-    videoAd = MoPubRewardedVideoAd('ad_unit_id',
-        (result, args) {
-      setState(() {
-        rewardedResult = '${result.toString()}____$args';
-      });
-      print('$result');
-      if (result == RewardedVideoAdResult.GRANT_REWARD) {
-        print('Grant reward: $args');
-      }
-    }, reloadOnClosed: true);
-  }
- ```
- ### 3. To load an interstitial ad  
-
-  ```sh
-   void _loadInterstitialAd() {
-    interstitialAd = MoPubInterstitialAd(
-      'ad_unit_id',
-      (result, args) {
-        print('Interstitial $result');
-      },
-      reloadOnClosed: true,
-    );    
-  }
- ```
- 
- 
-  ### 4. To call a banner ad
+  ### 2. To call a banner ad
 
   ```sh
    MoPubBannerAd(

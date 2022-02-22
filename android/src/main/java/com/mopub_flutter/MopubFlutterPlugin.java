@@ -1,6 +1,6 @@
 package com.mopub_flutter;
 
-import android.app.Activity;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 
@@ -11,43 +11,37 @@ import com.mopub.common.logging.MoPubLog;
 
 import java.util.HashMap;
 
+import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry;
-
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
 
 import static com.mopub.common.logging.MoPubLog.SdkLogEvent.CUSTOM;
 
 /**
  * MopubFlutterPlugin
  */
-public class MopubFlutterPlugin implements MethodCallHandler {
+public class MopubFlutterPlugin implements FlutterPlugin, MethodCallHandler {
 
-    private Activity activity;
+    private Context context;
 
-    private MopubFlutterPlugin(Activity activity) {
-        this.activity = activity;
+    private MethodChannel channel;
+
+    public MopubFlutterPlugin() {
     }
 
-    public static void registerWith(PluginRegistry.Registrar registrar) {
-        final MethodChannel channel = new MethodChannel(registrar.messenger(), MopubConstants.MAIN_CHANNEL);
-        channel.setMethodCallHandler(new MopubFlutterPlugin(registrar.activity()));
-
-        // Interstitial Ad channel
-        final MethodChannel interstitialAdChannel = new MethodChannel(registrar.messenger(),
-                MopubConstants.INTERSTITIAL_AD_CHANNEL);
-        interstitialAdChannel.setMethodCallHandler(new MopubInterstitialAdPlugin(registrar));
-
-        // Rewarded video Ad channel
-        final MethodChannel rewardedAdChannel = new MethodChannel(registrar.messenger(),
-                MopubConstants.REWARDED_VIDEO_CHANNEL);
-        rewardedAdChannel.setMethodCallHandler(new MopubRewardedVideoAdPlugin(registrar));
+    private static void setup(MopubFlutterPlugin plugin, FlutterPluginBinding binding,
+            BinaryMessenger binaryMessenger) {
+        plugin.context = binding.getApplicationContext();
+        plugin.channel = new MethodChannel(binaryMessenger, MopubConstants.MAIN_CHANNEL);
+        plugin.channel.setMethodCallHandler(plugin);
 
         // Banner Ad PlatformView channel
-        registrar.platformViewRegistry().registerViewFactory(MopubConstants.BANNER_AD_CHANNEL,
-                new MopubBannerAdPlugin(registrar.messenger()));
+        binding.getPlatformViewRegistry()
+                .registerViewFactory(MopubConstants.BANNER_AD_CHANNEL, new MopubBannerAdPlugin(binaryMessenger));
     }
 
     @Override
@@ -65,7 +59,7 @@ public class MopubFlutterPlugin implements MethodCallHandler {
         final SdkConfiguration.Builder configBuilder = new SdkConfiguration.Builder(adUnitId)
                 .withLogLevel(testMode ? MoPubLog.LogLevel.DEBUG : MoPubLog.LogLevel.NONE);
 
-        MoPub.initializeSdk(activity, configBuilder.build(), new SdkInitializationListener() {
+        MoPub.initializeSdk(context, configBuilder.build(), new SdkInitializationListener() {
             @Override
             public void onInitializationFinished() {
                 MoPubLog.log(CUSTOM, "##Flutter## MoPub SDK initialized." +
@@ -74,5 +68,15 @@ public class MopubFlutterPlugin implements MethodCallHandler {
         });
 
         return true;
+    }
+
+    @Override
+    public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
+        setup(this, flutterPluginBinding, flutterPluginBinding.getBinaryMessenger());
+    }
+
+    @Override
+    public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+        channel.setMethodCallHandler(null);
     }
 }

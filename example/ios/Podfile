@@ -31,7 +31,7 @@ target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
-  pod 'mopub-ios-sdk', '5.15.0'
+  //pod 'mopub-ios-sdk', '5.15.0'
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
